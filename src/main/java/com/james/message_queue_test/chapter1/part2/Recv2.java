@@ -10,10 +10,13 @@ public class Recv2 {
 
     public static void main(String[] args) throws Exception{
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("192.168.8.10");
+        factory.setHost("192.168.0.22");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+
+        // 消息持久化
+        boolean durable = true;
+        channel.queueDeclare(QUEUE_NAME, durable, false, false, null);
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "utf-8");
@@ -25,10 +28,13 @@ public class Recv2 {
                 e.printStackTrace();
             } finally {
                 System.out.println("[x] done");
+                // 消息应答
+                channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
             }
         };
 
-        boolean autoAck = true;
+        channel.basicQos(1);
+        boolean autoAck = false;
         channel.basicConsume(QUEUE_NAME, autoAck, deliverCallback, c -> {});
 
     }

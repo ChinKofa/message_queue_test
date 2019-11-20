@@ -13,7 +13,7 @@ public class NewTask {
     public static void main(String[] args) {
         String message = String.join(" ", args);
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("192.168.8.10");
+        factory.setHost("192.168.0.22");
 
         try(Connection connection = factory.newConnection();
             Channel channel = connection.createChannel();) {
