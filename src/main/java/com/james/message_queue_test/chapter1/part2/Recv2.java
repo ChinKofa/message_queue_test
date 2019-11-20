@@ -6,7 +6,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 
 public class Recv2 {
-    private final static String QUEUE_NAME = "Beautiful";
+    private final static String QUEUE_NAME = "Beautiful1";
 
     public static void main(String[] args) throws Exception{
         ConnectionFactory factory = new ConnectionFactory();
@@ -33,7 +33,8 @@ public class Recv2 {
             }
         };
 
-        channel.basicQos(1);
+        int prefetchCount = 1;
+        channel.basicQos(prefetchCount);
         boolean autoAck = false;
         channel.basicConsume(QUEUE_NAME, autoAck, deliverCallback, c -> {});
 
