@@ -1,4 +1,4 @@
-package com.james.message_queue_test.chapter1.part2;
+package com.james.message_queue_test.chapter1.workqueues;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

@@ -1,4 +1,4 @@
-package com.james.message_queue_test.chapter1.part2;
+package com.james.message_queue_test.chapter1.workqueues;
 
 public class Worker {
     public void doWork(String task) throws InterruptedException {
